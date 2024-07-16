@@ -7,5 +7,9 @@
   },
   "author": "hamza hussain",
   "license": "ISC",
-  "description": ""
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "http": "^0.0.1-security"
+  }
 }
