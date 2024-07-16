@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon  server.js",
+    "dev": "nodemon  server.js"
   },
   "author": "hamza hussain",
   "license": "ISC",
   "type": "module",
   "description": "",
   "dependencies": {
-    "http": "^0.0.1-security"
+    "dotenv": "^16.4.5",
+    "http": "^0.0.1-security",
+    "nodemon": "^3.1.4"
   }
 }

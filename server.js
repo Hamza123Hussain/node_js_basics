@@ -1,5 +1,8 @@
 import http from 'http'
+import { config } from './config.js'
+// server.js
 
+const Port = process.env.Port
 const server = http.createServer((req, res) => {
   res.setHeader('Content-type', 'text/html') // set what type of content can be seen on the webpage
   // we can have various types like text/plain, application/json etc.
@@ -11,8 +14,6 @@ const server = http.createServer((req, res) => {
   res.end() // ending the response
 })
 
-const Port = 8000
-
 server.listen(Port, () => {
-  console.log(`PORT RUNNING ON ${Port}`)
+  console.log(`PORT RUNNING ON ${config.port}`) // using env port number
 })
