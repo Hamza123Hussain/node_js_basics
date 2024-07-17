@@ -20,6 +20,27 @@ const JSONMiddlware = (req, res, next) => {
 
 // handlers make the server code clean
 
+//creating a post request
+const addnewuser = (req, res) => {
+  let body = '' // intializing body
+  req.on('data', (chunk) => {
+    // any chnage in the data will be added to body
+    body += chunk
+  })
+  req.on('end', () => {
+    // the body will added to the array once response ends
+    try {
+      const newuser = JSON.parse(body) // converting to string
+      people.push(newuser) // adding to array
+
+      res.statusCode = 201
+      console.log(newuser)
+      res.write(JSON.stringify(newuser)) // json compatiable makign
+    } catch (error) {
+      res.statusCode = 400
+    }
+  })
+}
 const GetAllusers = (req, res) => {
   // this is an handler for allusers
   res.statusCode = 200
@@ -45,6 +66,7 @@ const PageNotFound = (req, res) => {
   res.statusCode = 404
   res.write('PAGE NOT FOUND')
 }
+
 //FIRST API
 const server2 = createServer((req, res) => {
   Middlware(req, res, () => {
@@ -54,6 +76,8 @@ const server2 = createServer((req, res) => {
         GetAllusers(req, res)
       } else if (req.url.startsWith(`/api/users/`) && req.method === 'GET') {
         GetUserByID(req, res)
+      } else if (req.url === '/api/users' && req.method === 'POST') {
+        addnewuser(req, res)
       } else {
         PageNotFound(req, res)
       }
@@ -62,9 +86,9 @@ const server2 = createServer((req, res) => {
   })
 })
 
-server2.listen(config.port, () => {
-  console.log(`Server running on port ${config.port}`)
-})
+// server2.listen(config.port, () => {
+//   console.log(`Server running on port ${config.port}`)
+// })
 
 //FIRST API
 // const server2 = createServer((req, res) => {
