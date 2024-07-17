@@ -48,15 +48,53 @@ app.post('/api/CreateProduct', async (req, res) => {
 })
 
 app.get('/api/Product', async (req, res) => {
-  // adding data in db
+  //finding product in DB
   try {
-    const products = await ProductModel.find() //adding data to db
-    res.status(201).json(products) // printing created data
+    const products = await ProductModel.find() //finding products
+    res.status(201).json(products) // products found and printed
   } catch (error) {
-    console.error('Error creating product:', error)
+    console.error('Error creating product:', error) // products not found
     res.status(500).send('ERROR')
   }
 })
+
+app.get('/api/Product/:id', async (req, res) => {
+  // getting product by id
+  try {
+    const { id } = req.params // extracting id
+    const product = await ProductModel.findById(id) //locating product
+    res.status(201).json(product) // product found
+  } catch (error) {
+    console.error('Error creating product:', error) // product not found
+    res.status(500).send('ERROR')
+  }
+})
+
+app.put('/api/Product/:id', async (req, res) => {
+  // Updating Product
+  try {
+    const product = req.body // giving data from body
+    const { id } = req.params // extracting id
+    const updatedproduct = await ProductModel.findByIdAndUpdate(id, product) //locating product
+    res.status(201).json(updatedproduct) // product found and Updated
+  } catch (error) {
+    console.error('Error creating product:', error) // product not found
+    res.status(500).send('ERROR')
+  }
+})
+
+app.delete('/api/Product/:id', async (req, res) => {
+  //Deleting Product
+  try {
+    const { id } = req.params // extracting id
+    const deletedproduct = await ProductModel.findByIdAndDelete(id) //locating product
+    res.status(201).json({ message: 'PRODUCT DELETED' }) // product Deleted
+  } catch (error) {
+    console.error('Error creating product:', error) // product not found
+    res.status(500).send('ERROR')
+  }
+})
+//---
 //----------------------------------------------------------------------------------------------------
 app.listen(8000, () => {
   console.log('PORT RUNNING')
