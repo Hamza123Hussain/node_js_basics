@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url) // this gets me the complete p
 
 const __dirname = path.dirname(__filename) // this gets me the path till the directory name
 
-const app = express()
+export const app = express()
 
 app.use(express.static(path.join(__dirname, 'public'))) // THIS IS A STATIC SERVER
 // WE SSET A ROUTE HERE AND THEN CAN CALL ANY HTML FILE OR OTHER IN THE GIVEN PATH
