@@ -4,5 +4,5 @@ dotenv.config()
 export const config = {
   // storing all env data in here
   port: process.env.PORT,
-  dbHost: process.env.DB_HOST || 'localhost',
+  DB: process.env.Mongo,
 }
