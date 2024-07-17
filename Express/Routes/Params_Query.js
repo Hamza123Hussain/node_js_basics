@@ -1,4 +1,4 @@
-import { app } from './Static.js'
+import express from 'express'
 
 const posts = [
   { id: 1, Name: 'HAMZA HUSSAIN' },
@@ -21,7 +21,10 @@ const posts = [
   },
 ]
 
-app.get('/api/posts', (req, res) => {
+const Router = express.Router() //creating a router
+
+Router.get('/', (req, res) => {
+  // the path is given to app.use
   console.log(req.query.limit) //http://localhost:8000/api/posts?limit=5 req.query refers to the query made after the question mark
   const limit = req.query.limit
   if (!isNaN(limit) && limit > 0) {
@@ -31,7 +34,7 @@ app.get('/api/posts', (req, res) => {
   res.status(202).json(posts) // we can use res.send but this is specifically made for json
 })
 
-app.get('/api/posts/:id', (req, res) => {
+Router.get('/:id', (req, res) => {
   // : IS USED FOR SENDING PARAM IN URL
   console.log(req.params.id) //http://localhost:8000/api/posts?limit=5 req.query refers to the query made after the question mark
   const id = req.params.id
@@ -42,3 +45,5 @@ app.get('/api/posts/:id', (req, res) => {
   }
   res.status(404).json({ Message: `NO POST FOUND WITH ${id}` }) // setting status code through .status
 })
+
+export default Router // exporting the router
