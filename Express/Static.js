@@ -28,6 +28,10 @@ app.use(express.json())
 app.use('/api/posts', Router)
 
 app.use(express.static(path.join(__dirname, 'public')))
+/**app.use(express.static(path.join(__dirname, 'public'))) in a Node.js Express application tells the server to serve static files (like HTML, CSS, JavaScript, and images) from the public directory.
+ * This means that when users access the website, they can directly request these files through URLs.
+ *  For example, if there's an image logo.png in the public directory, it can be accessed at http://yourdomain.com/logo.png.
+ *  This line ensures that all files in the public directory are available to the users visiting your site. */
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
